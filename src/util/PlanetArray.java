@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import world.*;
 
 public class PlanetArray extends ArrayList<Planet> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3860251336614627035L;
+
 	Star star;
 	
 	public PlanetArray(Star star) 
@@ -12,11 +17,6 @@ public class PlanetArray extends ArrayList<Planet> {
 		
 		this.star = star;
 	}
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3860251336614627035L;
 
 	public void save() throws Exception
 	{

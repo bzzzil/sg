@@ -16,7 +16,13 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 	 */
 	private static final long serialVersionUID = 845167600466270803L;
 	
-	private static final Color rulerColor = new Color(30,30,30);
+	private static final Color ruler100Color = new Color(30,30,30);
+	private static final float dash1[] = {10.0f};
+	private static final BasicStroke ruler100Stroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
+
+	private static final Color ruler1000Color = new Color(30,30,30);
+	private static final BasicStroke ruler1000Stroke = new BasicStroke(2.0f);
+
 	private static final Color textColor = new Color(200,200,200);
 
 	private int mouseOverStar = -1;
@@ -38,49 +44,55 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 
 		// Double buffering
 		Graphics secondBuffer = g;
-		g = buffer.getGraphics();
+		Graphics2D g2 = (Graphics2D)buffer.getGraphics();
 
 		if (Galaxy.getInstance() == null || Galaxy.getStars() == null) {
-			g.fillRect(0, 0, size.width, size.height);
+			g2.fillRect(0, 0, size.width, size.height);
 		} else {
-			g.setColor(Color.black);
-			g.fillRect(0, 0, size.width, size.height);
+			g2.setColor(Color.black);
+			g2.fillRect(0, 0, size.width, size.height);
 
 			// Draw rulers
 			if (showRulers) {
-				drawRulers(g, size);
+				if (this.scale>=0.5) {
+					drawRulers(g2, size, 100, GuiGalaxyMap.ruler100Color, GuiGalaxyMap.ruler100Stroke);
+				}
+				drawRulers(g2, size, 1000, GuiGalaxyMap.ruler1000Color, GuiGalaxyMap.ruler1000Stroke);
 			}
 			
 			// Draw stars
 			for (int i = 0; i < Galaxy.getStars().size(); i++) {
-				Galaxy.getStars().get(i).draw(g, 
+				Galaxy.getStars().get(i).draw(g2, 
 						this.scale, this.x, this.y, 
 						this.showNames, this.showIds, this.mouseOverStar==i);
 			}
 			
 			// Draw info 
-			g.setColor(GuiGalaxyMap.textColor);
-			g.drawString(x + "," + y + "x" + this.scale, 0, 10);
+			g2.setColor(GuiGalaxyMap.textColor);
+			g2.drawString(x + "," + y + "x" + this.scale, 0, 10);
 		}
 
 		secondBuffer.drawImage(buffer, 0, 0, null);
 	}
 	
-	public void drawRulers(Graphics g, Dimension size) {
-		g.setColor(GuiGalaxyMap.rulerColor);
-		int rulerX = (int)(Math.ceil(-this.x/this.scale/100)*100); 
+	public void drawRulers(Graphics2D g2, Dimension size, int step, Color color, BasicStroke stroke) {
+		g2.setColor(color);
+		g2.setStroke(stroke);
+		int rulerX = (int)(Math.ceil(-this.x/this.scale/step)*step); 
 		do {
 			int rulerX_x = this.x + (int)(rulerX * this.scale);
-			g.drawLine(rulerX_x, 0, rulerX_x, size.height);
-			rulerX += 100;
-		} while (rulerX * this.scale < size.width);
+			g2.drawLine(rulerX_x, 0, rulerX_x, size.height);
+			g2.drawString(rulerX + "'", rulerX_x+5, 10);
+			rulerX += step;
+		} while (rulerX * this.scale <= size.width);
 
-		int rulerY = (int)(Math.ceil(-this.y/this.scale/100)*100); 
+		int rulerY = (int)(Math.ceil(-this.y/this.scale/step)*step); 
 		do {
 			int rulerY_y = this.y + (int)(rulerY * this.scale);
-			g.drawLine(0, rulerY_y, size.width, rulerY_y);
-			rulerY += 100;
-		} while (rulerY * this.scale < size.height);
+			g2.drawLine(0, rulerY_y, size.width, rulerY_y);
+			g2.drawString(rulerY + "'", 5 , rulerY_y+15);
+			rulerY += step;
+		} while (rulerY * this.scale <= size.height);
 	}
 
 	public void update(Graphics g) {
