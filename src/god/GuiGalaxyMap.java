@@ -76,7 +76,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			
 			// Draw stars
 			for (int i = 0; i < Galaxy.getStars().size(); i++) {
-				Galaxy.getStars().get(i).draw(g2, 
+				Galaxy.getStars().get(i).draw(g2,
 						this.scale, this.x, this.y, 
 						this.isShowNames(), this.isShowIds(), this.mouseOverStar==i);
 			}
