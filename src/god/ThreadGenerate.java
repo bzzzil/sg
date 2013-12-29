@@ -14,7 +14,7 @@ public class ThreadGenerate extends Thread {
 	{
 		//this.guiFrame.setEnabled(false);
 		
-		Galaxy.getInstance().setSeed(Galaxy.getInstance().generator.nextInt());
+		Galaxy.getInstance().setSeed(Galaxy.getGenerator().nextInt());
 		Galaxy.getInstance().create();
 
 		//this.guiFrame.setEnabled(true);

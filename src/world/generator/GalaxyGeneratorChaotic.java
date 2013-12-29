@@ -17,10 +17,10 @@ public class GalaxyGeneratorChaotic implements GalaxyGenerator {
     }
 
     public StarArray generate() {
-        Trace.message("1. God #" + Math.abs(Galaxy.getInstance().generator.nextInt())
+        Trace.message("1. God #" + Math.abs(Galaxy.getGenerator().nextInt())
                 + " made heaven & earth ");
 
-        int count = Galaxy.getInstance().generator.nextInt(2000)+200;
+        int count = Galaxy.getGenerator().nextInt(2000)+200;
 
         StarArray stars = new StarArray();
 
@@ -40,10 +40,10 @@ public class GalaxyGeneratorChaotic implements GalaxyGenerator {
                 int currentMaxDistance = this.maxDistance;
                 do {
                     location.setX(previousStar.getLocation().getX()
-                            + Galaxy.getInstance().generator.nextInt(currentMaxDistance * 2)
+                            + Galaxy.getGenerator().nextInt(currentMaxDistance * 2)
                             - currentMaxDistance);
                     location.setY(previousStar.getLocation().getY()
-                            + Galaxy.getInstance().generator.nextInt(currentMaxDistance * 2)
+                            + Galaxy.getGenerator().nextInt(currentMaxDistance * 2)
                             - currentMaxDistance);
                     if (iteration++ > 10) {
                         currentMaxDistance *= 2;
@@ -56,7 +56,7 @@ public class GalaxyGeneratorChaotic implements GalaxyGenerator {
             // Star temperature should be in 2000-40000K
             // http://en.wikipedia.org/wiki/Stellar_classification
             //
-            int temperature = (int)(Math.abs(Galaxy.getInstance().generator.nextGaussian()*7000) + 2000);
+            int temperature = (int)(Math.abs(Galaxy.getGenerator().nextGaussian()*7000) + 2000);
             if (temperature>40000)
             {
                 temperature = 40000;
@@ -64,7 +64,7 @@ public class GalaxyGeneratorChaotic implements GalaxyGenerator {
             else if (temperature < 2200)
             {
                 // Special case for classes below M
-                temperature = Galaxy.getInstance().generator.nextInt(2000);
+                temperature = Galaxy.getGenerator().nextInt(2000);
             }
             currentStar.setTemperature(temperature);
 
