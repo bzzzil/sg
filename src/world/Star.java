@@ -1,5 +1,8 @@
 package world;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import util.*;
 
 public class Star extends DBObject {
@@ -179,4 +182,56 @@ public class Star extends DBObject {
 			this.setState(DBObject.stateTypes.MODIFIED);
 	}
 	
+	/**
+	 * draw star into given graphics object
+	 * 
+	 * @param g graphic object draw to
+	 * @param scale scale level
+	 * @param x position of star
+	 * @param y position of star
+	 * @param showName true if name of star should be displayed near
+	 * @param showId true if id of star should be displayed near
+	 * @param isHover true if display mouse over event
+	 */
+	public void draw(Graphics g, double scale, int x, int y, boolean showName, boolean showId, boolean isHover)
+	{
+		int diameter = (int)scale + 5;
+		if (diameter < 1) {
+			diameter = 1;
+		}
+		
+		int star_x = (int)(x + scale * getLocation().getX());
+		int star_y = (int)(y + scale * getLocation().getY());
+
+		g.setColor(new Color(getTemperatureAsRGB()));
+
+		g.fillOval(star_x, star_y, diameter, diameter);
+
+		if (isHover) {
+			g.setColor(Color.white);
+		} else {
+			g.setColor(Color.gray);
+		}
+		
+		int textOffset = 0;
+		if (showId)
+		{
+			textOffset+=12;
+			g.drawString("#" + getId(), star_x + diameter,
+					star_y + diameter + textOffset);
+		}
+		
+		if (showName || isHover)
+		{
+			textOffset+=12;
+			g.drawString(getName(), star_x + diameter, 
+					star_y + diameter + textOffset);
+		}
+
+		if (isHover) {
+			g.setColor(Color.white);
+			g.drawOval(star_x - 2, star_y - 2, diameter + 4,
+					diameter + 4);
+		}
+	}
 }

@@ -45,46 +45,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			g.fillRect(0, 0, size.width, size.height);
 
 			for (int i = 0; i < stars.size(); i++) {
-				Star currentStar = stars.get(i);
-
-				int diameter = (int)this.scale + 5;
-				if (diameter < 1)
-					diameter = 1;
-				int star_x = (int)(x + this.scale
-						* currentStar.getLocation().getX());
-				int star_y = (int)(y + this.scale
-						* currentStar.getLocation().getY());
-
-				g.setColor(new Color(currentStar.getTemperatureAsRGB()));
-
-				g.fillOval(star_x, star_y, diameter, diameter);
-
-				if (i == this.mouseOverStar) {
-					g.setColor(Color.white);
-				} else {
-					g.setColor(Color.gray);
-				}
-				
-				int textOffset = 0;
-				if (this.showIds)
-				{
-					textOffset+=12;
-					g.drawString("#" + currentStar.getId(), star_x + diameter,
-							star_y + diameter + textOffset);
-				}
-				
-				if (this.showNames)
-				{
-					textOffset+=12;
-					g.drawString(currentStar.getName(), star_x + diameter, 
-							star_y + diameter + textOffset);
-				}
-
-				if (i == this.mouseOverStar) {
-					g.setColor(Color.white);
-					g.drawOval(star_x - 2, star_y - 2, diameter + 4,
-							diameter + 4);
-				}
+				stars.get(i).draw(g, scale, x, y, showNames, showIds, mouseOverStar==i);
 			}
 			g.drawString(
 					x + "," + y + "x" + this.scale, 0,
