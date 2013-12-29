@@ -53,12 +53,15 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 	 * Paint window
 	 */
 	public void paint(Graphics g) {
+        if (buffer == null) {
+            // Do not draw anything until double buffereing is initialized
+            return;
+        }
+
 		Dimension size = getSize();
 
 		// Double buffering
-		Graphics secondBuffer = g;
-		g = buffer.getGraphics();
-		Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D)buffer.getGraphics();
 
 		if (Galaxy.getInstance() == null || Galaxy.getStars() == null) {
 			g2.fillRect(0, 0, size.width, size.height);
@@ -86,7 +89,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			g2.drawString(x + "," + y + "x" + this.scale, 0, 10);
 		}
 
-		secondBuffer.drawImage(buffer, 0, 0, null);
+		g.drawImage(buffer, 0, 0, null);
 	}
 
     /**
@@ -97,7 +100,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
      * @param color lines color
      * @param stroke lines stroking style
      */
-	public void drawRulers(Graphics2D g2, Dimension size, int step, Color color, BasicStroke stroke) {
+    void drawRulers(Graphics2D g2, Dimension size, int step, Color color, BasicStroke stroke) {
 		g2.setStroke(stroke);
 		int rulerX = (int)(Math.ceil(-this.x/this.scale/step)*step);
 		int rulerX_x;
@@ -203,7 +206,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 
 	}
 
-	public boolean isShowNames() {
+	boolean isShowNames() {
 		return showNames;
 	}
 
@@ -211,7 +214,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 		this.showNames = showNames;
 	}
 
-	public boolean isShowIds() {
+	boolean isShowIds() {
 		return showIds;
 	}
 
@@ -219,7 +222,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 		this.showIds = showIds;
 	}
 
-	public boolean isShowRulers() {
+	boolean isShowRulers() {
 		return showRulers;
 	}
 

@@ -12,7 +12,7 @@ public class StarArray extends ArrayList<Star> {
 	private static final long serialVersionUID = 8039273398434330805L;
 	
 	
-	StarArrayDBsqlite db;
+	private StarArrayDBsqlite db;
 	public StarArray() 
 	{
 		super();
@@ -38,7 +38,7 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find nearest star to given coordinate
 	 * 
-	 * @param Coordinate coord
+	 * @param coord
 	 * @return int
 	 */
 	public int getNearest(Coordinate coord)
@@ -63,7 +63,7 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find distance from given coordinate to nearest star  
 	 * 
-	 * @param Coordinate coord
+	 * @param coord
 	 * @return double
 	 */
 	public double getNearestDistance(Coordinate coord)
@@ -74,15 +74,15 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find and return star by name
 	 * 
-	 * @param String name
+	 * @param name
 	 * @return Star
 	 */
 	public Star getByName(String name)
 	{
-		for (int i=0;i<this.size();i++)
+		for (Star star: this)
 		{
-			if (this.get(i).getName().equals(name))
-				return this.get(i);
+			if (star.getName().equals(name))
+				return star;
 		}
 		
 		return null;
@@ -91,10 +91,10 @@ public class StarArray extends ArrayList<Star> {
 	public Rectangle getBoundsRectangle()
 	{
 		Rectangle boundsRect = new Rectangle();
-		
-		for (int i=0;i<this.size();i++)
+
+        for (Star star: this)
 		{
-			Coordinate coord = this.get(i).getLocation();
+			Coordinate coord = star.getLocation();
 			int x = coord.getX();
 			int y = coord.getY();
 			

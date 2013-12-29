@@ -12,10 +12,10 @@ public class JMap extends JComponent
 	 */
 	private static final long serialVersionUID = 7642872258252222012L;
 	protected int x, y;
-	protected int click_x, click_y;
+	private int click_x, click_y;
 	protected double scale = 1;
 
-	public JMap()
+	protected JMap()
 	{
 		addMouseMotionListener(this);
 		addMouseWheelListener(this);

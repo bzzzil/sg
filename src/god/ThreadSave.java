@@ -2,8 +2,8 @@ package god;
 
 import world.Galaxy;
 
-public class ThreadSave extends Thread {
-	private GodFrame guiFrame;
+class ThreadSave extends Thread {
+	private final GodFrame guiFrame;
 	
 	public ThreadSave(GodFrame guiFrame)
 	{

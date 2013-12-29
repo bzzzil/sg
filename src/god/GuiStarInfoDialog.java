@@ -16,8 +16,8 @@ public class GuiStarInfoDialog extends JDialog implements ActionListener {
 	/**
 	 * Dialog constructor
 	 * 
-	 * @param Frame
-	 * @param star
+	 * @param frame
+	 * @param star object to display
 	 */
 	public GuiStarInfoDialog(Frame frame, Star star) {
 		super(frame, "", true);

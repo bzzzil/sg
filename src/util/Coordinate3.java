@@ -1,7 +1,7 @@
 package util;
 
-public class Coordinate3 extends Coordinate {
-	protected int z;
+class Coordinate3 extends Coordinate {
+	private int z;
 
 	public Coordinate3() {
 

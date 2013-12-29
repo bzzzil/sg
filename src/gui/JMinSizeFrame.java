@@ -12,11 +12,11 @@ public class JMinSizeFrame extends JFrame implements ComponentListener {
 	private int minHeight = -1;
 	private int minWidth  = -1;
 
-	public JMinSizeFrame() {
+	protected JMinSizeFrame() {
 		addComponentListener(this);
 	}
 	
-	public void setMinimumSize(int width, int height)
+	protected void setMinimumSize(int width, int height)
 	{
 		minWidth = width;
 		minHeight = height;

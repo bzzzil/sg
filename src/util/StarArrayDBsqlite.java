@@ -3,10 +3,10 @@ package util;
 import java.sql.*;
 import world.Star;
 
-public class StarArrayDBsqlite {
-	protected Connection connection;
+class StarArrayDBsqlite {
+	private Connection connection;
 	
-	StarArray stars;
+	private StarArray stars;
 	
 	public StarArrayDBsqlite(StarArray stars) throws ClassNotFoundException, SQLException 
 	{
@@ -38,12 +38,11 @@ public class StarArrayDBsqlite {
 	{
 		Statement stat = connection.createStatement();
 		stat.executeUpdate("CREATE TABLE IF NOT EXISTS stars (id, x, y, temperature, name);");
-		
+
 		PreparedStatement prepInsert = connection.prepareStatement("INSERT INTO stars VALUES (?, ?, ?, ?, ?);");
 		PreparedStatement prepUpdate = connection.prepareStatement("UPDATE stars SET x=?, y=?, temperature=?, name=? WHERE id=?;");
-		for (int i=0;i<stars.size();i++)
+		for (Star star: stars)
 		{
-			Star star = stars.get(i);
 			if (star.getState()==DBObject.stateTypes.NEW)
 			{
 				prepInsert.setInt(1, star.getId());

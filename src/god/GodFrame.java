@@ -8,19 +8,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class GodFrame extends JMinSizeFrame {
+class GodFrame extends JMinSizeFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8999040258283619751L;
 
-	/**
-	 * Panel buttons
-	 */
-	JButton generate, save, exit;
-	JCheckBox showNames, showIds, showrulers;
-
-	Border border;
+    private final Border border;
 
 	/**
 	 * Map visualization
@@ -32,48 +26,51 @@ public class GodFrame extends JMinSizeFrame {
 	 * 
 	 * @return JComponent
 	 */
-	public JComponent createControlPanel()
+    JComponent createControlPanel()
 	{
 		// Controls
-		this.generate = new JButton("Generate");
-		this.generate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				actionGenerate();
-			}
-		});
-		this.save = new JButton("Save");
-		this.save.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				actionSave();
-			}
-		});
-		this.exit = new JButton("Exit");
-		this.exit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				actionExit();
-			}
-		});
-		this.showNames = new JCheckBox("Show Names");
-		this.showNames.addItemListener(new ItemListener() {
+		/*
+	  Panel buttons
+	 */
+        JButton generate = new JButton("Generate");
+		generate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                actionGenerate();
+            }
+        });
+        JButton save = new JButton("Save");
+		save.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                actionSave();
+            }
+        });
+        JButton exit = new JButton("Exit");
+		exit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                actionExit();
+            }
+        });
+        JCheckBox showNames = new JCheckBox("Show Names");
+		showNames.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                 map.setShowNames(((JCheckBox) ie.getItem()).isSelected());
                 map.repaint();
             }
         });
-		this.showIds = new JCheckBox("Show IDs");
-		this.showIds.addItemListener(new ItemListener() {
+        JCheckBox showIds = new JCheckBox("Show IDs");
+		showIds.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                 map.setShowIds(((JCheckBox) ie.getItem()).isSelected());
                 map.repaint();
             }
         });
-		this.showrulers = new JCheckBox("Show Rulers");
-		this.showrulers.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent ie) {
-				map.setShowRulers(((JCheckBox) ie.getItem()).isSelected());
-				map.repaint();
-			}
-		});
+        JCheckBox showRulers = new JCheckBox("Show Rulers");
+		showRulers.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent ie) {
+                map.setShowRulers(((JCheckBox) ie.getItem()).isSelected());
+                map.repaint();
+            }
+        });
 		
 		JPanel rightPanel = new JPanel();
 		//rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
@@ -82,19 +79,19 @@ public class GodFrame extends JMinSizeFrame {
 				border,
 				new EmptyBorder(5, 5, 5, 5)));
 
-		rightPanel.add(this.generate);
-		rightPanel.add(this.save);
-		rightPanel.add(this.exit);
-		rightPanel.add(this.showNames);
-		rightPanel.add(this.showIds);
-		rightPanel.add(this.showrulers);
+		rightPanel.add(generate);
+		rightPanel.add(save);
+		rightPanel.add(exit);
+		rightPanel.add(showNames);
+		rightPanel.add(showIds);
+		rightPanel.add(showRulers);
 		rightPanel.setMinimumSize(new Dimension(200,2000));
 
 		
 		return rightPanel;
 	}
 	
-	public JComponent createTracePanel()
+	JComponent createTracePanel()
 	{
 		JTraceTextArea trace = new JTraceTextArea();
 		Trace.getInstance().setHandler(trace);
@@ -106,7 +103,7 @@ public class GodFrame extends JMinSizeFrame {
 		return areaScrollPane;
 	}
 	
-	public JComponent createMapPanel()
+	JComponent createMapPanel()
 	{
 		this.map = new GuiGalaxyMap();
 
@@ -123,7 +120,7 @@ public class GodFrame extends JMinSizeFrame {
 	/**
 	 * Initialization
 	 */
-	public GodFrame() {
+    private GodFrame() {
 		// Standard border
 		border = BorderFactory.createCompoundBorder(
 				new EmptyBorder(5, 5, 5, 5),
@@ -134,13 +131,13 @@ public class GodFrame extends JMinSizeFrame {
 		JComponent controlPanel = createControlPanel();
 		JComponent tracePanel = createTracePanel();
 		
-		JPanel topArea = new JPanel();
-		topArea.setMinimumSize(new Dimension(300,250));
-		topArea.setLayout(new BorderLayout());
-		topArea.add(mapPanel, BorderLayout.CENTER);
-		topArea.add(controlPanel, BorderLayout.EAST);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setMinimumSize(new Dimension(300, 250));
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(mapPanel, BorderLayout.CENTER);
+		mainPanel.add(controlPanel, BorderLayout.EAST);
 		
-		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topArea, tracePanel);
+		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, mainPanel, tracePanel);
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setResizeWeight(0.9);
 		add(splitPane);
@@ -152,17 +149,17 @@ public class GodFrame extends JMinSizeFrame {
 		});
 	}
 
-	public void actionGenerate() {
+	void actionGenerate() {
 		ThreadGenerate gen = new ThreadGenerate(this);
 		gen.start();
 	}
 
-	public void actionSave() {
+	void actionSave() {
 		ThreadSave save = new ThreadSave(this);
 		save.start();
 	}
 	
-	public void actionExit() {
+	void actionExit() {
 		System.exit(0);
 	}
 

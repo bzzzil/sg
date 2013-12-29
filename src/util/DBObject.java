@@ -1,10 +1,10 @@
 package util;
 
 public class DBObject {
-	public enum stateTypes {UNCHANGED, NEW, MODIFIED, REMOVED};
-	stateTypes state;
+	public enum stateTypes {UNCHANGED, NEW, MODIFIED, REMOVED}
+	private stateTypes state;
 	
-	public DBObject()
+	protected DBObject()
 	{
     	this.setState(stateTypes.NEW);
 	}

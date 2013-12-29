@@ -2,14 +2,13 @@ package world.generator;
 
 import util.Coordinate;
 import util.StarArray;
-import util.StarName;
 import util.Trace;
 import world.Galaxy;
 import world.Star;
 
 public class GalaxyGeneratorChaotic implements GalaxyGenerator {
-    private int maxDistance;
-    private int minDistance;
+    private final int maxDistance;
+    private final int minDistance;
 
     public GalaxyGeneratorChaotic(int minDistance, int maxDistance) {
         this.minDistance = minDistance;
@@ -71,7 +70,7 @@ public class GalaxyGeneratorChaotic implements GalaxyGenerator {
             // Generate and set unique star name
             String currentStarName;
             do {
-                currentStarName = StarName.getName();
+                currentStarName = StarNameGenerator.getName();
             } while (stars.getByName(currentStarName) != null);
             currentStar.setName(currentStarName);
 

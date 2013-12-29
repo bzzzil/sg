@@ -3,7 +3,7 @@ package world;
 import util.*;
 
 public class Planet extends DBObject {
-	protected int id = -1;
+	private int id = -1;
 	private int distance;
 	
 	/**

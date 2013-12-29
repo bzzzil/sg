@@ -9,7 +9,7 @@ public class PlanetArray extends ArrayList<Planet> {
 	 */
 	private static final long serialVersionUID = -3860251336614627035L;
 
-	Star star;
+	private final Star star;
 	
 	public PlanetArray(Star star) 
 	{

@@ -7,12 +7,12 @@ import world.generator.GalaxyGeneratorChaotic;
 
 public class Galaxy {
 	// Random generator with predefined seed to use in generate()
-	protected Random generator;
+    Random generator;
 
-	public final static int maxDistance = 150;
-	public final static int minDistance = 20;
+	private final static int maxDistance = 150;
+	private final static int minDistance = 20;
 
-	protected StarArray stars;
+	private StarArray stars;
 
 	// Singleton realization
 	private static final Galaxy INSTANCE = new Galaxy();
@@ -62,7 +62,7 @@ public class Galaxy {
 		}		
 	}
 
-	public void load()
+	void load()
 	{
 		this.stars = new StarArray();
 		try {

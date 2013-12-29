@@ -6,11 +6,11 @@ import java.awt.Graphics2D;
 import util.*;
 
 public class Star extends DBObject {
-	protected int id = -1;
-	protected Coordinate location;
-	protected int temperature;
-	protected String name;
-	protected PlanetArray planets;
+	private int id = -1;
+	private Coordinate location;
+	private int temperature;
+	private String name;
+	private PlanetArray planets;
 
 	public Star() 
 	{
@@ -21,7 +21,7 @@ public class Star extends DBObject {
 	/**
 	 * Calculate Cartesian distance between current star and give coordinate
 	 * 
-	 * @param Coordinate anotherCoordinate
+	 * @param anotherCoordinate
 	 * @return float
 	 */
 	public double getDistance(Coordinate anotherCoordinate)
@@ -52,7 +52,7 @@ public class Star extends DBObject {
 	 * 
 	 * @return int - temperature in Kelvins in visual specter
 	 */
-	public int getTemperatureAsRGB() {
+    int getTemperatureAsRGB() {
 		if (temperature<600)
 		{
 			// Y class
@@ -185,7 +185,7 @@ public class Star extends DBObject {
 	/**
 	 * draw star into given graphics object
 	 * 
-	 * @param g graphic object draw to
+	 * @param g2 graphic object draw to
 	 * @param scale scale level
 	 * @param x position of star
 	 * @param y position of star

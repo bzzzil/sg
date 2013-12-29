@@ -1,8 +1,8 @@
 package util;
 
 public class Coordinate {
-	protected int x;
-	protected int y;
+	private int x;
+    private int y;
 
 	public Coordinate() {
 
