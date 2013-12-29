@@ -18,8 +18,8 @@ public class GodFrame extends JMinSizeFrame {
 	 * Panel buttons
 	 */
 	JButton generate, save, exit;
-	JCheckBox shownames, showids, showrulers;
-	
+	JCheckBox showNames, showIds, showrulers;
+
 	Border border;
 
 	/**
@@ -30,7 +30,7 @@ public class GodFrame extends JMinSizeFrame {
 	/**
 	 * Right instruments panel initialization
 	 * 
-	 * @return
+	 * @return JComponent
 	 */
 	public JComponent createControlPanel()
 	{
@@ -53,20 +53,20 @@ public class GodFrame extends JMinSizeFrame {
 				actionExit();
 			}
 		});
-		this.shownames = new JCheckBox("Show Names");
-		this.shownames.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent ie) {
-				map.setShowNames(((JCheckBox) ie.getItem()).isSelected());
-				map.repaint();
-			}
-		});
-		this.showids = new JCheckBox("Show IDs");
-		this.showids.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent ie) {
-				map.setShowIds(((JCheckBox) ie.getItem()).isSelected());
-				map.repaint();
-			}
-		});
+		this.showNames = new JCheckBox("Show Names");
+		this.showNames.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent ie) {
+                map.setShowNames(((JCheckBox) ie.getItem()).isSelected());
+                map.repaint();
+            }
+        });
+		this.showIds = new JCheckBox("Show IDs");
+		this.showIds.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent ie) {
+                map.setShowIds(((JCheckBox) ie.getItem()).isSelected());
+                map.repaint();
+            }
+        });
 		this.showrulers = new JCheckBox("Show Rulers");
 		this.showrulers.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent ie) {
@@ -85,8 +85,8 @@ public class GodFrame extends JMinSizeFrame {
 		rightPanel.add(this.generate);
 		rightPanel.add(this.save);
 		rightPanel.add(this.exit);
-		rightPanel.add(this.shownames);
-		rightPanel.add(this.showids);
+		rightPanel.add(this.showNames);
+		rightPanel.add(this.showIds);
 		rightPanel.add(this.showrulers);
 		rightPanel.setMinimumSize(new Dimension(200,2000));
 
@@ -140,9 +140,7 @@ public class GodFrame extends JMinSizeFrame {
 		topArea.add(mapPanel, BorderLayout.CENTER);
 		topArea.add(controlPanel, BorderLayout.EAST);
 		
-		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-				topArea,
-				tracePanel);
+		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topArea, tracePanel);
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setResizeWeight(0.9);
 		add(splitPane);
@@ -171,7 +169,7 @@ public class GodFrame extends JMinSizeFrame {
 	/**
 	 * God interface entrypoint
 	 * 
-	 * @param args
+	 * @param args command line arguments
 	 */
 	public static void main(String args[]) {
 		GodFrame godGui = new GodFrame();
