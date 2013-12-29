@@ -46,6 +46,11 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			g.setColor(Color.black);
 			g.fillRect(0, 0, size.width, size.height);
 
+			// Draw rulers
+			if (showRulers) {
+				drawRulers(g, size);
+			}
+			
 			// Draw stars
 			for (int i = 0; i < Galaxy.getStars().size(); i++) {
 				Galaxy.getStars().get(i).draw(g, 
@@ -53,13 +58,8 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 						this.showNames, this.showIds, this.mouseOverStar==i);
 			}
 			
-			// Draw rulers
-			if (showRulers) {
-				drawRulers(g, size);
-			}
-			
 			// Draw info 
-			g.setColor(textColor);
+			g.setColor(GuiGalaxyMap.textColor);
 			g.drawString(x + "," + y + "x" + this.scale, 0, 10);
 		}
 
@@ -67,7 +67,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 	}
 	
 	public void drawRulers(Graphics g, Dimension size) {
-		g.setColor(this.rulerColor);
+		g.setColor(GuiGalaxyMap.rulerColor);
 		int rulerX = (int)(Math.ceil(-this.x/this.scale/100)*100); 
 		do {
 			int rulerX_x = this.x + (int)(rulerX * this.scale);
