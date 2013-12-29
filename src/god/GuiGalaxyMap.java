@@ -67,7 +67,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			g2.fillRect(0, 0, size.width, size.height);
 
 			// Draw rulers
-			if (showRulers) {
+			if (isShowRulers()) {
 				if (this.scale>=0.5) {
 					drawRulers(g2, size, 100, GuiGalaxyMap.ruler100Color, GuiGalaxyMap.ruler100Stroke);
 				}
@@ -78,7 +78,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			for (int i = 0; i < Galaxy.getStars().size(); i++) {
 				Galaxy.getStars().get(i).draw(g2, 
 						this.scale, this.x, this.y, 
-						this.showNames, this.showIds, this.mouseOverStar==i);
+						this.isShowNames(), this.isShowIds(), this.mouseOverStar==i);
 			}
 			
 			// Draw info 
@@ -88,7 +88,15 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 
 		secondBuffer.drawImage(buffer, 0, 0, null);
 	}
-	
+
+    /**
+     * Draw vertical and horizontal rulers with given step
+     * @param g2 draw object
+     * @param size size of viewport
+     * @param step step for rulers
+     * @param color lines color
+     * @param stroke lines stroking style
+     */
 	public void drawRulers(Graphics2D g2, Dimension size, int step, Color color, BasicStroke stroke) {
 		g2.setStroke(stroke);
 		int rulerX = (int)(Math.ceil(-this.x/this.scale/step)*step);
@@ -133,8 +141,9 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			// Find nearest to mouse star
 			int nearestStar = Galaxy.getStars().getNearest(mouseCoordinate);
 			
-			if (nearestStar<0)
+			if (nearestStar<0) {
 				return;
+            }
 			
 			double nearestStarDistance = Galaxy.getStars().get(nearestStar).getDistance(mouseCoordinate) * this.scale;
 
