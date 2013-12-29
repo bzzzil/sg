@@ -15,14 +15,27 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 	 * 
 	 */
 	private static final long serialVersionUID = 845167600466270803L;
-	
+	/**
+	 * Rulers coordinates text color
+	 */
+	private static final Color rulerTextColor = new Color(60,60,60);
+
+	/**
+	 * Ruler 100 line properties
+	 */
 	private static final Color ruler100Color = new Color(30,30,30);
 	private static final float dash1[] = {10.0f};
 	private static final BasicStroke ruler100Stroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
 
+	/**
+	 * Ruler 1000 line properties
+	 */
 	private static final Color ruler1000Color = new Color(30,30,30);
 	private static final BasicStroke ruler1000Stroke = new BasicStroke(2.0f);
 
+	/**
+	 * Static text color
+	 */
 	private static final Color textColor = new Color(200,200,200);
 
 	private int mouseOverStar = -1;
@@ -44,7 +57,8 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 
 		// Double buffering
 		Graphics secondBuffer = g;
-		Graphics2D g2 = (Graphics2D)buffer.getGraphics();
+		g = buffer.getGraphics();
+		Graphics2D g2 = (Graphics2D)g;
 
 		if (Galaxy.getInstance() == null || Galaxy.getStars() == null) {
 			g2.fillRect(0, 0, size.width, size.height);
@@ -76,23 +90,28 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 	}
 	
 	public void drawRulers(Graphics2D g2, Dimension size, int step, Color color, BasicStroke stroke) {
-		g2.setColor(color);
 		g2.setStroke(stroke);
-		int rulerX = (int)(Math.ceil(-this.x/this.scale/step)*step); 
+		int rulerX = (int)(Math.ceil(-this.x/this.scale/step)*step);
+		int rulerX_x;
 		do {
-			int rulerX_x = this.x + (int)(rulerX * this.scale);
+			rulerX_x = this.x + (int)(rulerX * this.scale);
+			g2.setColor(color);
 			g2.drawLine(rulerX_x, 0, rulerX_x, size.height);
-			g2.drawString(rulerX + "'", rulerX_x+5, 10);
+			g2.setColor(GuiGalaxyMap.rulerTextColor);
+			g2.drawString(rulerX + "'", rulerX_x + 5, 10);
 			rulerX += step;
-		} while (rulerX * this.scale <= size.width);
+		} while (rulerX_x <= size.width);
 
-		int rulerY = (int)(Math.ceil(-this.y/this.scale/step)*step); 
+		int rulerY = (int)(Math.ceil(-this.y/this.scale/step)*step);
+		int rulerY_y;
 		do {
-			int rulerY_y = this.y + (int)(rulerY * this.scale);
+			rulerY_y = this.y + (int)(rulerY * this.scale);
+			g2.setColor(color);
 			g2.drawLine(0, rulerY_y, size.width, rulerY_y);
-			g2.drawString(rulerY + "'", 5 , rulerY_y+15);
+			g2.setColor(GuiGalaxyMap.rulerTextColor);
+			g2.drawString(rulerY + "'", 5 , rulerY_y + 15);
 			rulerY += step;
-		} while (rulerY * this.scale <= size.height);
+		} while (rulerY_y <= size.height);
 	}
 
 	public void update(Graphics g) {

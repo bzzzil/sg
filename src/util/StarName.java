@@ -30,18 +30,17 @@ public class StarName {
 			"za"
 			};
 
-	public static String getName()
-	{
-		String name = new String();
-		
+	public static String getName() {
 		int syllablesCount = Galaxy.getInstance().generator.nextInt(2)+2;
+		String name;
 		
-		for (int i=0;i<syllablesCount;i++)
-		{
-			int syllableId = Galaxy.getInstance().generator.nextInt(syllables.length);
-			
-			name+=syllables[syllableId];
-		}
+		do {
+			name = "";
+			for (int i=0;i<syllablesCount;i++) {
+				int syllableId = Galaxy.getInstance().generator.nextInt(syllables.length);
+				name+=syllables[syllableId];
+			}
+		} while (name.length()<=2);
 		
 		return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
 	}
