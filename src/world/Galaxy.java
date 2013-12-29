@@ -37,12 +37,9 @@ public class Galaxy {
 
 		int count = generator.nextInt(2000)+200;
 
-		if (this.stars==null)
-		{
+		if (this.stars==null) {
 			this.stars= new StarArray();
-		}
-		else 
-		{
+		} else {
 			this.stars.clear();
 		}
 		
