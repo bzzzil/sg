@@ -21,8 +21,8 @@ public class GuiStarInfoDialog extends JDialog implements ActionListener {
 	 */
 	public GuiStarInfoDialog(Frame frame, Star star) {
 		super(frame, "", true);
-		setLayout(new GridLayout(6, 2));
-		setSize(200, 100);
+		setLayout(new GridLayout(8, 2));
+		setSize(300, 200);
 		this.setResizable(false);
 
 		setTitle(star.getName() + " - star info");
@@ -32,7 +32,10 @@ public class GuiStarInfoDialog extends JDialog implements ActionListener {
 		
 		add(new JLabel("Name:"));
 		add(new JLabel(star.getName()));
-		
+
+		add(new JLabel("Coordinates:"));
+		add(new JLabel(star.getLocation().toString()));
+
 		add(new JLabel("Temperature:"));
 		add(new JLabel(""+star.getTemperature()+" K"));
 

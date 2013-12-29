@@ -18,7 +18,7 @@ public class GodFrame extends JMinSizeFrame {
 	 * Panel buttons
 	 */
 	JButton generate, save, exit;
-	JCheckBox shownames, showids;
+	JCheckBox shownames, showids, showrulers;
 	
 	Border border;
 
@@ -53,7 +53,7 @@ public class GodFrame extends JMinSizeFrame {
 				actionExit();
 			}
 		});
-		this.shownames = new JCheckBox("Show names");
+		this.shownames = new JCheckBox("Show Names");
 		this.shownames.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent ie) {
 				map.setShowNames(((JCheckBox) ie.getItem()).isSelected());
@@ -67,10 +67,17 @@ public class GodFrame extends JMinSizeFrame {
 				map.repaint();
 			}
 		});
+		this.showrulers = new JCheckBox("Show Rulers");
+		this.showrulers.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent ie) {
+				map.setShowRulers(((JCheckBox) ie.getItem()).isSelected());
+				map.repaint();
+			}
+		});
 		
 		JPanel rightPanel = new JPanel();
 		//rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
-		rightPanel.setLayout(new GridLayout(5, 1));
+		rightPanel.setLayout(new GridLayout(6, 1));
 		rightPanel.setBorder(BorderFactory.createCompoundBorder(
 				border,
 				new EmptyBorder(5, 5, 5, 5)));
@@ -80,6 +87,7 @@ public class GodFrame extends JMinSizeFrame {
 		rightPanel.add(this.exit);
 		rightPanel.add(this.shownames);
 		rightPanel.add(this.showids);
+		rightPanel.add(this.showrulers);
 		rightPanel.setMinimumSize(new Dimension(200,2000));
 
 		

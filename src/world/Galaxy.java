@@ -72,7 +72,6 @@ public class Galaxy {
 					}
 				} while (this.stars.getNearestDistance(location) < minDistance);
 				currentStar.getLocation().set(location);
-
 			}
 
 			// Star temperature
