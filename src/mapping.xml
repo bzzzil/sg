@@ -5,19 +5,28 @@
 <hibernate-mapping>
 
     <class name="world.Star" table="stars">
-        <id name="id" column="id" type="int">
+        <id name="id" column="star_id" type="int">
             <generator class="native"/>
         </id>
         <property name="name" column="name" type="string"/>
         <property name="temperature" column="temperature" type="int"/>
         <property name="x" column="x" type="double"/>
         <property name="y" column="y" type="double"/>
+        <set name="planets" fetch="join" lazy="false">
+            <key>
+                <column name="star_id" not-null="true"/>
+            </key>
+            <one-to-many class="world.Planet" />
+        </set>
     </class>
 
     <class name="world.Planet" table="planets">
-        <id name="id">
+        <id name="id" column="planet_id" type="int">
             <generator class="native"/>
         </id>
+        <many-to-one name="sun" class="world.Star" fetch="join" lazy="false">
+            <column name="star_id" not-null="true" />
+        </many-to-one>
     </class>
 
 </hibernate-mapping>

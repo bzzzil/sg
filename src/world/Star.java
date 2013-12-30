@@ -5,30 +5,22 @@ import util.Trace;
 
 import javax.persistence.*;
 import java.awt.*;
+import java.util.*;
 import java.util.List;
 
-@Entity
-@Table(name="stars")
 public class Star {
 
-    @Id @GeneratedValue
-    @Column(name="id")
     private int id;
 
-    @Column(name="temperature")
     private int temperature;
 
-    @Column(name="name")
     private String name;
 
-    @Column(name="x")
     private double x;
 
-    @Column(name="y")
     private double y;
 
-    @OneToMany
-    List<Planet> planets;
+    private Set<Planet> planets;
 
     public int getId() {
         return id;
@@ -66,10 +58,14 @@ public class Star {
         this.y = y;
     }
 
-    public List<Planet> getPlanets() {
+    @OneToMany(fetch=FetchType.EAGER)
+    public Set<Planet> getPlanets() {
+        if (planets == null) {
+            planets = new HashSet<Planet>();
+        }
         return planets;
     }
-    public void setPlanets(List<Planet> planets) {
+    public void setPlanets(Set<Planet> planets) {
         this.planets = planets;
     }
 
@@ -179,9 +175,9 @@ public class Star {
 
             currentPlanet.create();
             currentPlanet.setId(i);
+            currentPlanet.setSun(this);
 
-            // TODO
-           // this.planets.add(currentPlanet);
+            this.getPlanets().add(currentPlanet);
         }
     }
 

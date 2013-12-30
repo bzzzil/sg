@@ -28,19 +28,19 @@ public class GuiStarInfoDialog extends JDialog implements ActionListener {
 		setTitle(star.getName() + " - star info");
 		
 		add(new JLabel("#"));
-		add(new JLabel(""+star.getId()));
+		add(new JLabel("" + star.getId()));
 		
 		add(new JLabel("Name:"));
 		add(new JLabel(star.getName()));
 
 		add(new JLabel("Coordinates:"));
-		add(new JLabel("" + star.getX() + star.getY()));
+		add(new JLabel("(" + star.getX() + ", " + star.getY() + ")"));
 
 		add(new JLabel("Temperature:"));
-		add(new JLabel(""+star.getTemperature()+" K"));
+		add(new JLabel("" + star.getTemperature()+  " K"));
 
 		add(new JLabel("Planets:"));
-		add(new JLabel(""+star.getPlanets().size()));
+		add(new JLabel("" + star.getPlanets().size()));
 
 		JButton okButton;
 		add(okButton = new JButton("Close"));

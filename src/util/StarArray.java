@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import world.Galaxy;
+import world.Planet;
 import world.Star;
 
 public class StarArray extends ArrayList<Star> {
@@ -89,8 +90,11 @@ public class StarArray extends ArrayList<Star> {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        for (Star star: this) {
+        for ( Star star: this ) {
             session.save(star);
+            for ( Planet planet: star.getPlanets() ) {
+                session.save(planet);
+            }
         }
         session.getTransaction().commit();
     }

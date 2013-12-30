@@ -76,7 +76,7 @@ public class GalaxyGeneratorChaotic implements GalaxyGenerator {
             } while (stars.getByName(currentStarName) != null);
             currentStar.setName(currentStarName);
 
-            currentStar.setId(i);
+            //currentStar.setId(i);
 
             currentStar.create();
 

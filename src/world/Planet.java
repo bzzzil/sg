@@ -5,10 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-/**
- * Created by Basil on 30.12.13.
- */
-@Entity
 public class Planet {
 
     public Planet() {
@@ -21,9 +17,9 @@ public class Planet {
 
     }
 
-    @GeneratedValue
-    @Id
     private int id;
+
+    private Star sun;
 
     public int getId() {
         return id;
@@ -31,5 +27,13 @@ public class Planet {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Star getSun() {
+        return sun;
+    }
+
+    public void setSun(Star sun) {
+        this.sun = sun;
     }
 }
