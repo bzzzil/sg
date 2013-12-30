@@ -11,7 +11,7 @@ public class PlanetArray extends ArrayList<Planet> {
 
 	private final Star star;
 	
-	public PlanetArray(Star star) 
+	public PlanetArray(Star star)
 	{
 		super();
 		

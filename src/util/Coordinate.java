@@ -1,18 +1,18 @@
 package util;
 
 public class Coordinate {
-	private int x;
-    private int y;
+	private double x;
+    private double y;
 
 	public Coordinate() {
 
 	}
 
-	public Coordinate(int x, int y) {
+	public Coordinate(double x, double y) {
 		set(x, y);
 	}
 
-	public void set(int x, int y) {
+	public void set(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -22,7 +22,7 @@ public class Coordinate {
 		this.y = location.getY();
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
@@ -30,7 +30,7 @@ public class Coordinate {
 		this.x = x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 

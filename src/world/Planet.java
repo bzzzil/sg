@@ -1,42 +1,35 @@
 package world;
 
-import util.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-public class Planet extends DBObject {
-	private int id = -1;
-	private int distance;
-	
-	/**
-	 * Galaxy generation routine
-	 * 
-	 */
-	public void create() {
-		
-	}
-	
-	public int getId() {
-		return id;
-	}
+/**
+ * Created by Basil on 30.12.13.
+ */
+@Entity
+public class Planet {
 
-	public void setId(int id) {
-		if (this.id != -1)
-		{
-			// TODO exception
-			return;
-		}
-		
-		this.id = id;
-		
-		if (this.getState()!=DBObject.stateTypes.NEW)
-			this.setState(DBObject.stateTypes.MODIFIED);
-	}
+    public Planet() {
+    }
 
-	public void setDistance(int distance) {
-		this.distance = distance;
-    	this.setState(DBObject.stateTypes.MODIFIED);
-	}
+    /**
+     * Planet generation routine
+     */
+    public void create() {
 
-	public int getDistance() {
-		return distance;
-	}
+    }
+
+    @GeneratedValue
+    @Id
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

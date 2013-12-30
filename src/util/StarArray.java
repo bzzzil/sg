@@ -10,30 +10,6 @@ public class StarArray extends ArrayList<Star> {
 	 * 
 	 */
 	private static final long serialVersionUID = 8039273398434330805L;
-	
-	
-	private StarArrayDBsqlite db;
-	public StarArray() 
-	{
-		super();
-		
-		try {
-			this.db = new StarArrayDBsqlite(this);
-		} catch (Exception e) {
-			Trace.critical("Can't connect to database: "+e.getMessage());
-		}	
-	}
-
-	@Override
-	public void clear()
-	{
-		super.clear();
-		try {
-			db.clear();
-		} catch (Exception e) {
-			Trace.critical("Galaxy cleanup failed: "+e.getMessage());
-		}	
-	}
 
 	/**
 	 * Find nearest star to given coordinate
@@ -79,8 +55,7 @@ public class StarArray extends ArrayList<Star> {
 	 */
 	public Star getByName(String name)
 	{
-		for (Star star: this)
-		{
+		for (Star star: this) {
 			if (star.getName().equals(name))
 				return star;
 		}
@@ -92,33 +67,24 @@ public class StarArray extends ArrayList<Star> {
 	{
 		Rectangle boundsRect = new Rectangle();
 
-        for (Star star: this)
-		{
-			Coordinate coord = star.getLocation();
-			int x = coord.getX();
-			int y = coord.getY();
+        for (Star star: this) {
+			double x = star.getX();
+            double y = star.getY();
 			
-			if (x<boundsRect.x)
-				boundsRect.x = x;
-			if (x>boundsRect.x+boundsRect.width)
-				boundsRect.width = x-boundsRect.x;
-			if (y<boundsRect.y)
-				boundsRect.y = y;
-			if (y>boundsRect.y+boundsRect.height)
-				boundsRect.height = y-boundsRect.y;
+			if ( x < boundsRect.x ) {
+				boundsRect.x = (int)x;
+            }
+			if ( x > boundsRect.x+boundsRect.width ) {
+				boundsRect.width = (int)(x-boundsRect.x);
+            }
+			if ( y < boundsRect.y ) {
+				boundsRect.y = (int)y;
+            }
+			if ( y > boundsRect.y+boundsRect.height ) {
+				boundsRect.height = (int)(y-boundsRect.y);
+            }
 		}
 
 		return boundsRect;
-	}
-	
-	public void save() throws Exception
-	{
-		db.save();
-	}
-	
-	public void load() throws Exception
-	{
-		super.clear();
-		db.load();
 	}
 }

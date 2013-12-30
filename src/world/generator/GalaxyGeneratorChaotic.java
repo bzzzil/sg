@@ -29,26 +29,28 @@ public class GalaxyGeneratorChaotic implements GalaxyGenerator {
             // Generate star location: not so far (maxDistance) from previous
             // and not so close (minDistance) to any another
             if (i == 0) {
-                currentStar.getLocation().set(0, 0);
+                currentStar.setX(0);
+                currentStar.setY(0);
             } else {
                 // Star position
                 Star previousStar = stars.get(i - 1);
 
-                Coordinate location = new Coordinate();
+                double x, y;
                 int iteration = 0;
                 int currentMaxDistance = this.maxDistance;
                 do {
-                    location.setX(previousStar.getLocation().getX()
+                    x = previousStar.getX()
                             + Galaxy.getGenerator().nextInt(currentMaxDistance * 2)
-                            - currentMaxDistance);
-                    location.setY(previousStar.getLocation().getY()
+                            - currentMaxDistance;
+                    y =previousStar.getY()
                             + Galaxy.getGenerator().nextInt(currentMaxDistance * 2)
-                            - currentMaxDistance);
+                            - currentMaxDistance;
                     if (iteration++ > 10) {
                         currentMaxDistance *= 2;
                     }
-                } while (stars.getNearestDistance(location) < this.minDistance);
-                currentStar.getLocation().set(location);
+                } while (stars.getNearestDistance(new Coordinate(x, y)) < this.minDistance);
+                currentStar.setX(x);
+                currentStar.setY(y);
             }
 
             // Star temperature
