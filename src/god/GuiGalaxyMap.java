@@ -18,25 +18,25 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 	/**
 	 * Rulers coordinates text color
 	 */
-	private static final Color rulerTextColor = new Color(60,60,60);
+	private static final Color RULER_TEXT_COLOR = new Color(60,60,60);
 
 	/**
 	 * Ruler 100 line properties
 	 */
-	private static final Color ruler100Color = new Color(30,30,30);
-	private static final float dash1[] = {10.0f};
-	private static final BasicStroke ruler100Stroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
+	private static final Color RULER_100_COLOR = new Color(30,30,30);
+	private static final float DASH_1[] = {2.0f};
+	private static final BasicStroke RULER_100_STROKE = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, DASH_1, 0.0f);
 
 	/**
 	 * Ruler 1000 line properties
 	 */
-	private static final Color ruler1000Color = new Color(30,30,30);
-	private static final BasicStroke ruler1000Stroke = new BasicStroke(2.0f);
+	private static final Color RULER_1000_COLOR = new Color(30,30,30);
+	private static final BasicStroke RULER_1000_STROKE = new BasicStroke(2.0f);
 
 	/**
 	 * Static text color
 	 */
-	private static final Color textColor = new Color(200,200,200);
+	private static final Color TEXT_COLOR = new Color(200,200,200);
 
 	private int mouseOverStar = -1;
 	private Image buffer;
@@ -72,9 +72,9 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			// Draw rulers
 			if (isShowRulers()) {
 				if (this.scale>=0.5) {
-					drawRulers(g2, size, 100, GuiGalaxyMap.ruler100Color, GuiGalaxyMap.ruler100Stroke);
+					drawRulers(g2, size, 100, GuiGalaxyMap.RULER_100_COLOR, GuiGalaxyMap.RULER_100_STROKE);
 				}
-				drawRulers(g2, size, 1000, GuiGalaxyMap.ruler1000Color, GuiGalaxyMap.ruler1000Stroke);
+				drawRulers(g2, size, 1000, GuiGalaxyMap.RULER_1000_COLOR, GuiGalaxyMap.RULER_1000_STROKE);
 			}
 			
 			// Draw stars
@@ -85,7 +85,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			}
 			
 			// Draw info 
-			g2.setColor(GuiGalaxyMap.textColor);
+			g2.setColor(GuiGalaxyMap.TEXT_COLOR);
 			g2.drawString(x + "," + y + "x" + this.scale, 0, 10);
 		}
 
@@ -108,7 +108,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			rulerX_x = this.x + (int)(rulerX * this.scale);
 			g2.setColor(color);
 			g2.drawLine(rulerX_x, 0, rulerX_x, size.height);
-			g2.setColor(GuiGalaxyMap.rulerTextColor);
+			g2.setColor(GuiGalaxyMap.RULER_TEXT_COLOR);
 			g2.drawString(rulerX + "'", rulerX_x + 5, 10);
 			rulerX += step;
 		} while (rulerX_x <= size.width);
@@ -119,7 +119,7 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			rulerY_y = this.y + (int)(rulerY * this.scale);
 			g2.setColor(color);
 			g2.drawLine(0, rulerY_y, size.width, rulerY_y);
-			g2.setColor(GuiGalaxyMap.rulerTextColor);
+			g2.setColor(GuiGalaxyMap.RULER_TEXT_COLOR);
 			g2.drawString(rulerY + "'", 5 , rulerY_y + 15);
 			rulerY += step;
 		} while (rulerY_y <= size.height);

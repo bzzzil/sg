@@ -6,12 +6,14 @@ import javax.swing.JComponent;
 
 public class JMap extends JComponent 
 	implements MouseMotionListener, MouseWheelListener {
-	
-	/**
+
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = 7642872258252222012L;
-	protected int x, y;
+    public static final int SCALE_MAX = 16;
+    public static final double SCALE_MIN = 0.05;
+    protected int x, y;
 	private int click_x, click_y;
 	protected double scale = 1;
 
@@ -32,10 +34,10 @@ public class JMap extends JComponent
 		else
 			this.scale *= 2;
 			
-		if (this.scale < 0.1)
-			this.scale = 0.1;
-		if (this.scale > 16)
-			this.scale = 16;
+		if (this.scale < SCALE_MIN)
+			this.scale = SCALE_MIN;
+		if (this.scale > SCALE_MAX)
+			this.scale = SCALE_MAX;
 
 		// Change location
 		x = (int)((x - mwe.getX()) * this.scale / old_scale + mwe.getX());
