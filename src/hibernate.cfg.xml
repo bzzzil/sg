@@ -4,13 +4,12 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url"/>
-    <property name="connection.driver_class">org.sqlite.JDBC</property>
-    <property name="connection.username"/>
-    <property name="connection.password"/>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-      <mapping class="world.Star"/>
-      <mapping class="world.Planet"/>
+      <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
+      <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+      <property name="hibernate.connection.url">jdbc:hsqldb:file:db/db;shutdown=true;hsqldb.write_delay=false;</property>
+      <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+      <property name="hibernate.connection.username">SA</property>
+      <property name="hibernate.connection.password"/>
       <mapping resource="mapping.xml"/>
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

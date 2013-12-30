@@ -8,72 +8,67 @@ import java.awt.*;
 import java.util.List;
 
 @Entity
+@Table(name="stars")
 public class Star {
 
-    @GeneratedValue
-    @Id
+    @Id @GeneratedValue
+    @Column(name="id")
     private int id;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
+    @Column(name="temperature")
     private int temperature;
 
-    public int getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(int temperatire) {
-        this.temperature = temperatire;
-    }
-
-    @Basic
+    @Column(name="name")
     private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    @Basic
+    @Column(name="x")
     private double x;
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    @Basic
+    @Column(name="y")
     private double y;
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
 
     @OneToMany
     List<Planet> planets;
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+    public void setTemperature(int temperatire) {
+        this.temperature = temperatire;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getX() {
+        return x;
+    }
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public List<Planet> getPlanets() {
         return planets;
     }
-
     public void setPlanets(List<Planet> planets) {
         this.planets = planets;
     }

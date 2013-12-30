@@ -1,5 +1,6 @@
 package god;
 
+import util.HibernateUtil;
 import util.Trace;
 import gui.*;
 
@@ -38,6 +39,12 @@ class GodFrame extends JMinSizeFrame {
                 actionGenerate();
             }
         });
+        JButton load = new JButton("Load");
+        load.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                actionLoad();
+            }
+        });
         JButton save = new JButton("Save");
 		save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -74,12 +81,13 @@ class GodFrame extends JMinSizeFrame {
 		
 		JPanel rightPanel = new JPanel();
 		//rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
-		rightPanel.setLayout(new GridLayout(6, 1));
+		rightPanel.setLayout(new GridLayout(7, 1));
 		rightPanel.setBorder(BorderFactory.createCompoundBorder(
 				border,
 				new EmptyBorder(5, 5, 5, 5)));
 
 		rightPanel.add(generate);
+        rightPanel.add(load);
 		rightPanel.add(save);
 		rightPanel.add(exit);
 		rightPanel.add(showNames);
@@ -154,12 +162,18 @@ class GodFrame extends JMinSizeFrame {
 		gen.start();
 	}
 
-	void actionSave() {
+    void actionLoad() {
+        ThreadLoad load = new ThreadLoad(this);
+        load.start();
+    }
+
+    void actionSave() {
 		ThreadSave save = new ThreadSave(this);
 		save.start();
 	}
-	
+
 	void actionExit() {
+        HibernateUtil.getSessionFactory().close();
 		System.exit(0);
 	}
 
@@ -175,5 +189,5 @@ class GodFrame extends JMinSizeFrame {
 		godGui.setMinimumSize(640, 4);
 		godGui.setTitle("sg [god mode]");
 		godGui.setVisible(true);
-	}
+    }
 }

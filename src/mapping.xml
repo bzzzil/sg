@@ -5,10 +5,13 @@
 <hibernate-mapping>
 
     <class name="world.Star" table="stars">
-        <id name="id" column="id">
+        <id name="id" column="id" type="int">
             <generator class="native"/>
         </id>
         <property name="name" column="name" type="string"/>
+        <property name="temperature" column="temperature" type="int"/>
+        <property name="x" column="x" type="double"/>
+        <property name="y" column="y" type="double"/>
     </class>
 
     <class name="world.Planet" table="planets">

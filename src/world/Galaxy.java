@@ -19,8 +19,7 @@ public class Galaxy {
 
 	private Galaxy() {
 		setSeed(System.currentTimeMillis());
-
-		load();
+		//load();
 	}
 
 	public static Galaxy getInstance() {
@@ -55,18 +54,18 @@ public class Galaxy {
 	public void save()
 	{
 		try {
-			//this.stars.save();
+			this.stars.save();
 			Trace.message("Galaxy saved successfully");
 		} catch (Exception e) {
 			Trace.critical("Galaxy saving failed: "+e.getMessage());
 		}		
 	}
 
-	void load()
+	public void load()
 	{
 		this.stars = new StarArray();
 		try {
-			//this.stars.load();
+			this.stars.load();
 			Trace.message("Galaxy: "+this.stars.size()+" stars loaded");
 		} catch (Exception e) {
 			Trace.critical("Galaxy loading failed: "+e.getMessage());
