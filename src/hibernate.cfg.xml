@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-      <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
-      <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-      <property name="hibernate.connection.url">jdbc:hsqldb:file:db/db;shutdown=true;hsqldb.write_delay=false;</property>
-      <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
-      <property name="hibernate.connection.username">SA</property>
-      <property name="hibernate.connection.password"/>
-      <mapping resource="mapping.xml"/>
-      <!-- DB schema will be updated if needed -->
-    <!-- <property name="hbm2ddl.auto">update</property> -->
-  </session-factory>
+    <session-factory>
+        <property name="current_session_context_class">thread</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sg</property>
+        <property name="hibernate.connection.username">sg</property>
+        <property name="hibernate.connection.password">sg</property>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="show_sql">false</property>
+        <mapping resource="mapping.xml"/>
+    </session-factory>
 </hibernate-configuration>

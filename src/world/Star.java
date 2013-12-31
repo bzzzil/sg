@@ -58,7 +58,6 @@ public class Star {
         this.y = y;
     }
 
-    @OneToMany(fetch=FetchType.EAGER)
     public Set<Planet> getPlanets() {
         if (planets == null) {
             planets = new HashSet<Planet>();
