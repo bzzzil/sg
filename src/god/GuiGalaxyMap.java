@@ -8,7 +8,6 @@ import java.awt.*;
 
 import util.Coordinate;
 import util.StarArray;
-import util.Trace;
 import world.*;
 
 public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListener {

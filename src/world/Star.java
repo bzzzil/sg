@@ -28,8 +28,8 @@ public class Star {
     public int getTemperature() {
         return temperature;
     }
-    public void setTemperature(int temperatire) {
-        this.temperature = temperatire;
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
     }
 
 

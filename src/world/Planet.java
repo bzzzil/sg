@@ -1,10 +1,5 @@
 package world;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 public class Planet {
 
     public Planet() {

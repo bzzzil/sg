@@ -59,7 +59,7 @@ class StarNameGenerator {
      * Checks is given letter is vowel
      *
      * @param c letter to check
-     * @return bool if ture
+     * @return bool
      */
     private static boolean isVowel(char c)
     {

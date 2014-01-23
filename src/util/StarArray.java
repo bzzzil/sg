@@ -17,15 +17,15 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find nearest star to given coordinate
 	 * 
-	 * @param coord Coordinate
+	 * @param coordinate Coordinate
 	 * @return int
 	 */
-	public int getNearest(Coordinate coord) {
+	public int getNearest(Coordinate coordinate) {
 		int nearest = -1;
 		double nearestDistance = 1E20;
 		
 		for (int i=0;i<this.size();i++) {
-			double currDistance = get(i).getDistance(coord);
+			double currDistance = get(i).getDistance(coordinate);
 			
 			if (currDistance < nearestDistance) {
 				nearest = i;
@@ -39,11 +39,11 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find distance from given coordinate to nearest star  
 	 * 
-	 * @param coord Coordinate
+	 * @param coordinate Coordinate
 	 * @return double
 	 */
-	public double getNearestDistance(Coordinate coord) {
-		return get(getNearest(coord)).getDistance(coord);
+	public double getNearestDistance(Coordinate coordinate) {
+		return get(getNearest(coordinate)).getDistance(coordinate);
 	}
 	
 	/**
