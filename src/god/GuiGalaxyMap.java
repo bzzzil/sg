@@ -8,6 +8,7 @@ import java.awt.*;
 
 import util.Coordinate;
 import util.StarArray;
+import util.Trace;
 import world.*;
 
 public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListener {
@@ -87,7 +88,10 @@ public class GuiGalaxyMap extends JMap implements MouseListener, ComponentListen
 			// Draw info 
 			g2.setColor(GuiGalaxyMap.TEXT_COLOR);
 			g2.drawString(x + "," + y + "x" + this.scale, 0, 10);
-		}
+
+            /*g2.setColor(Color.red);
+            g2.drawRect(x + scaledBoundsRect.x, y+scaledBoundsRect.y, scaledBoundsRect.width, scaledBoundsRect.height);*/
+        }
 
 		g.drawImage(buffer, 0, 0, null);
 	}

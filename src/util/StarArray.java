@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import world.Galaxy;
 import world.Planet;
 import world.Star;
 
@@ -18,7 +17,7 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find nearest star to given coordinate
 	 * 
-	 * @param coord
+	 * @param coord Coordinate
 	 * @return int
 	 */
 	public int getNearest(Coordinate coord) {
@@ -40,7 +39,7 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find distance from given coordinate to nearest star  
 	 * 
-	 * @param coord
+	 * @param coord Coordinate
 	 * @return double
 	 */
 	public double getNearestDistance(Coordinate coord) {
@@ -50,7 +49,7 @@ public class StarArray extends ArrayList<Star> {
 	/**
 	 * Find and return star by name
 	 * 
-	 * @param name
+	 * @param name String
 	 * @return Star
 	 */
 	public Star getByName(String name) {
@@ -63,27 +62,18 @@ public class StarArray extends ArrayList<Star> {
 	}
 	
 	public Rectangle getBoundsRectangle() {
-		Rectangle boundsRect = new Rectangle();
-
+        int maxX = 0, minX = 0, maxY = 0, minY = 0;
         for (Star star: this) {
-			double x = star.getX();
-            double y = star.getY();
-			
-			if ( x < boundsRect.x ) {
-				boundsRect.x = (int)x;
-            }
-			if ( x > boundsRect.x+boundsRect.width ) {
-				boundsRect.width = (int)(x-boundsRect.x);
-            }
-			if ( y < boundsRect.y ) {
-				boundsRect.y = (int)y;
-            }
-			if ( y > boundsRect.y+boundsRect.height ) {
-				boundsRect.height = (int)(y-boundsRect.y);
-            }
+			int x = (int)star.getX();
+            int y = (int)star.getY();
+
+            minX = Math.min(minX, x);
+            maxX = Math.max(maxX, x);
+            minY = Math.min(minY, y);
+            maxY = Math.max(maxY, y);
 		}
 
-		return boundsRect;
+		return new Rectangle(minX, minY, maxX - minX, maxY - minY);
 	}
 
     public void save() {
@@ -103,8 +93,7 @@ public class StarArray extends ArrayList<Star> {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<Star> result = session.createQuery("FROM Star").list();
-        for (Star star: result)
-        {
+        for (Star star: result) {
             this.add(star);
         }
         session.getTransaction().commit();

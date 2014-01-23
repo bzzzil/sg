@@ -18,6 +18,7 @@ class ThreadGenerate extends Thread {
 		Galaxy.getInstance().create();
 
 		//this.guiFrame.setEnabled(true);
+        this.guiFrame.map.setBoundsRectangle(Galaxy.getStars().getBoundsRectangle());
 		this.guiFrame.map.repaint();
 	}
 }

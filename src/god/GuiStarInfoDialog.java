@@ -16,7 +16,7 @@ public class GuiStarInfoDialog extends JDialog implements ActionListener {
 	/**
 	 * Dialog constructor
 	 * 
-	 * @param frame
+	 * @param frame Frame
 	 * @param star object to display
 	 */
 	public GuiStarInfoDialog(Frame frame, Star star) {
@@ -28,7 +28,7 @@ public class GuiStarInfoDialog extends JDialog implements ActionListener {
 		setTitle(star.getName() + " - star info");
 		
 		add(new JLabel("#"));
-		add(new JLabel("" + star.getId()));
+		add(new JLabel("" + star.getStar_id()));
 		
 		add(new JLabel("Name:"));
 		add(new JLabel(star.getName()));

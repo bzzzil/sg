@@ -1,16 +1,12 @@
 package world;
 
 import util.Coordinate;
-import util.Trace;
-
-import javax.persistence.*;
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class Star {
 
-    private int id;
+    private int star_id;
 
     private int temperature;
 
@@ -22,11 +18,11 @@ public class Star {
 
     private Set<Planet> planets;
 
-    public int getId() {
-        return id;
+    public int getStar_id() {
+        return star_id;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setStar_id(int id) {
+        this.star_id = id;
     }
 
     public int getTemperature() {
@@ -71,14 +67,26 @@ public class Star {
     /**
      * Calculate Cartesian distance between current star and give coordinate
      *
-     * @param anotherCoordinate
+     * @param anotherCoordinate Coordinate
      * @return float
      */
     public double getDistance(Coordinate anotherCoordinate)
     {
+        return getDistance(anotherCoordinate.getX(), anotherCoordinate.getY());
+    }
+
+    /**
+     * Calculate Cartesian distance between current star and give coordinate
+     *
+     * @param x double
+     * @param y double
+     * @return float
+     */
+    public double getDistance(double x, double y)
+    {
         return Math.sqrt(
-                Math.pow(this.getX() - anotherCoordinate.getX(), 2) +
-                Math.pow(this.getY() - anotherCoordinate.getY(), 2)
+                Math.pow(this.getX() - x, 2) +
+                        Math.pow(this.getY() - y, 2)
         );
     }
 
@@ -146,22 +154,6 @@ public class Star {
         }
     }
 
-
-    /**
-     * Calculate Cartesian distance between current star and give coordinate
-     *
-     * @param double x
-     * @param double y
-     * @return float
-     */
-    public double getDistance(double x, double y)
-    {
-        return Math.sqrt(
-                Math.pow(this.getX() - x, 2) +
-                Math.pow(this.getY() - y, 2)
-        );
-    }
-
     /**
      * Star generation routine
      */
@@ -181,7 +173,7 @@ public class Star {
     }
 
     public String toString() {
-        return "Star #" + getId()
+        return "Star #" + getStar_id()
                 + " (" + getX() + ", " + getY() + "), "
                 + getName() + ", " + getTemperature() + "K";
     }
@@ -221,7 +213,7 @@ public class Star {
         if (showId)
         {
             textOffset+=12;
-            g2.drawString("#" + getId(), star_x + diameter,
+            g2.drawString("#" + getStar_id(), star_x + diameter,
                     star_y + diameter + textOffset);
         }
 

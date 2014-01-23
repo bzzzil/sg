@@ -17,6 +17,7 @@ class ThreadLoad extends Thread {
         Galaxy.getInstance().load();
 
         //this.guiFrame.setEnabled(true);
+        this.guiFrame.map.setBoundsRectangle(Galaxy.getStars().getBoundsRectangle());
         this.guiFrame.map.repaint();
     }
 }
