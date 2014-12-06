@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import world.Planet;
 import world.Star;
@@ -60,7 +61,12 @@ public class StarArray extends ArrayList<Star> {
 		
 		return null;
 	}
-	
+
+    /**
+     * Get galaxy dimensions: max and min values for x and y
+     *
+     * @return Rectangle
+     */
 	public Rectangle getBoundsRectangle() {
         int maxX = 0, minX = 0, maxY = 0, minY = 0;
         for (Star star: this) {
@@ -76,10 +82,22 @@ public class StarArray extends ArrayList<Star> {
 		return new Rectangle(minX, minY, maxX - minX, maxY - minY);
 	}
 
+    /**
+     * Save stars and planets into DB
+     *
+     * @return void
+     */
     public void save() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
+        // Delete old data
+        Query q = session.createQuery("DELETE Planet");
+        q.executeUpdate();
+        q = session.createQuery("DELETE Star");
+        q.executeUpdate();
+
+        // Save current state
         for ( Star star: this ) {
             session.save(star);
             for ( Planet planet: star.getPlanets() ) {
@@ -89,6 +107,11 @@ public class StarArray extends ArrayList<Star> {
         session.getTransaction().commit();
     }
 
+    /**
+     * Load array (stars and planets) from DB
+     *
+     * @return void
+     */
     public void load() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
